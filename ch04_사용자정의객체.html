@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 리터럴 표기(직접 작성)를 이용한 객체의 생성
+        let puppy = {
+            // 속성
+            name: "초코",
+            // 메서드
+            eat: function(){
+                document.write("<p>밥을 먹습니다</p>")
+            },
+            run: ()=> {
+                document.write("<p>달립니다</p>")
+            }
+        }
+
+        let person = {
+            name: "홍길동",
+            address: "부산",
+            intro: function (){
+                return `${this.name} 님은 ${person.address}에 거주 중입니다`
+            }
+        }
+
+        let myCookie = {
+            shape: "원",
+            flavor: "초코",
+            intro: ()=> {
+                return `${myCookie.shape}모양의 ${myCookie.flavor}맛입니다`
+            }
+        }
+
+        // new Object() 함수를 이용한 객체 생성
+        let tree = new Object();
+        tree.kind = "은행나무";
+        tree.light = function (){
+            document.write(`<p>${tree.kind}가 광합성을 합니다</p>`);
+        }
+
+        let myBook = new Object();
+        myBook.title = "어린왕자";
+        myBook.price = 6000;
+        myBook.intro = function(){
+            document.write(`<p>${myBook.title}입니다. ${myBook.price}원 입니다 </p>`);
+        }
+        myBook.discount = function(){
+            myBook.price *= 0.9;
+        }
+
+        // 실습
+        let myWallet = new Object();
+        myWallet.owner = "홍길동";
+        myWallet.money = 10000;
+        myWallet.show = function() {
+            return `현재 ${myWallet.money}원 남았습니다`
+        }
+        myWallet.buy = function(pay) {
+            if (myWallet.money >= pay) {
+                myWallet.money -= pay;
+            } else {
+                return `물건을 살 수 없습니다`
+            }
+        }
+        myWallet.input = function (money) {
+            myWallet.money += money;
+        }
+
+
+        // 생성자 함수를 통해 객체를 작성하는 방법
+        // 객체 틀 생성
+        function Dog(name, age) {
+            this.name = name;
+            this.age = age;
+            this.print = function (){
+                document.write(`<p>${this.name}입니다</p>`)
+            }
+        }
+        // 값을 가진 객체를 생성하려면
+        let myPuppy = new Dog("댕이",1);
+
+        // 실습 01
+        // 틀 생성
+        function Student(name, score) {
+            this.name = name;
+            this.score = score;
+            this.study = function (){
+                this.score += 10;
+            }
+            this.showScore = function (){
+                return this.score;
+            }
+        }
+        // 실습1 - 객체생성
+        let myStudent = new Student("홍길동", 70);
+        let yourStudent = new Student("성춘향", 80);
+
+        // 실습 02
+        // 틀 생성
+        function BusCard(money){
+            this.money = money;
+            this.charge = function(add){
+                this.money += add;
+            }
+            this.takeBus = function(){
+                if(this.money >= 1500) {
+                    this.money -= 1500;
+                } else {
+                    return `잔액이 부족합니다`;
+                }
+            }
+            this.showMoney = function(){
+                return this.money;
+            }
+        }
+        // 실습2 - 객체 생성
+        let myBusCard = new BusCard(1500);
+        let yourBusCard = new BusCard(1000);
+
+        // 실습 03
+        // 틀 생성
+        function Message(name, content, time){
+            this.name = name;
+            this.content = content;
+            this.time = time;
+            this.modifyMessage = function(message){
+                this.content = message;
+            }
+            this.showMessage = function(){
+                return `${this.name}님 께서 ${this.content}를 ${this.time}에 보냈습니다`
+            }   
+        }
+        // 실습3 - 객체생성
+            let myMessage = new Message("홍길동","반갑습니다","17:45");
+            let yourMessage = new Message("성춘향","안녕하세요","17:46");
+
+
+            let memo = {
+                title : "오늘 할 일",
+                todo : {
+                    morning : ["청소"],
+                    afternoon : ["수업"],
+                    evening : ["정리","독서"]
+                }
+            };
+
+            let myMovie = {
+                title : "킹메이커",
+                time : "120",
+                rate : 8.84,
+                comment : {
+                    id : ["movieMaster"],
+                    content : ["Good", "Excellent"]
+                }
+            };
+
+            // 사용자 객체 실습 - 동물병원 진료차트
+            // 생성자 함수 생성 후 객체를 만들어 채우는 방식
+
+            // 객체 틀 생성
+            function AnimalChart(name, kind, age) {
+                this.name = name;
+                this.kind = kind;
+                this.age = age;
+                this.sickness = "";
+                this.condition = "";
+                this.receive = function(sickness, condition){
+                    this.sickness = sickness;
+                    this.condition = condition;
+                }
+                this.confirm = function(){
+                    let s = ""
+                    for(let x in this) {
+                        // 함수부분 제외하기 위해 함수타입이면 넘어가도록 if문 작성
+                        if ( typeof this[x] == "function" ) {
+                            continue;
+                        }
+                        s += x+":"+this[x]+"\n";
+                    }
+                    return s;
+                }
+            }
+            // 객체 생성
+            let first = new AnimalChart("홍길동", "강아지", 2);
+            first.receive('감기','나쁨');
+            first.confirm();
+
+            let count =0;
+            let charts =[];
+            charts[count]= new AnimalChart("성춘향", "고양이", 5);
+            count++;
+
+            
+
+
+
+
+    </script>
+</body>
+</html>

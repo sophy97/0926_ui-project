@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+        function power(a,b) {
+            if(b==null) {
+                return Math.pow(a,2); 
+            } else {
+                return Math.pow(a,b);
+            }
+        }
+
+        let multiply = function (a,b,c,d,e) {
+            return a*b*c*d*e;
+        }
+
+        function meetAt(x,y,z) {
+            if(y == undefined && z == undefined) {
+                return console.log(x+"년");
+            } else if (z == undefined) {
+                return console.log(x+"년"+y+" 월");
+            } else {
+                return console.log(x+"/"+y+"/"+z);
+            }
+        }
+
+    </script>
+</body>
+</html>
